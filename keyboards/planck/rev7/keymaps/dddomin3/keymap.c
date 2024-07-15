@@ -48,15 +48,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* NAV
  * ,-----------------------------------------------------------------------------------.
- * | GESC |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  |  -   |
+ * |      |      |  Up  |      |      |      |      |      |  Up  |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Tab  |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  '   |
+ * |      | Left | Down | Right|      |      |      | Left | Down | Right|      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Shift |
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Nav  | Ctrl | Alt  | GUI  |Lower | Space| Enter|Raise | Bksp | Alt  | Ctrl | Num  |
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
+
 
 [_NAV] = LAYOUT_planck_grid(
     _______, _______, KC_UP  , _______, _______, _______, _______, _______, KC_UP  , _______, _______, _______,
@@ -120,6 +121,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY
 ),
 
+/* Plover layer (http://opensteno.org)
+ * ,-----------------------------------------------------------------------------------.
+ * |   #  |   #  |   #  |   #  |   #  |   #  |   #  |   #  |   #  |   #  |   #  |   #  |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |   S  |   T  |   P  |   H  |   *  |   *  |   F  |   P  |   L  |   T  |   D  |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |   S  |   K  |   W  |   R  |   *  |   *  |   R  |   B  |   G  |   S  |   Z  |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Exit |      |      |   A  |   O  |             |   E  |   U  |      |      |      |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_PLOVER] = LAYOUT_planck_grid(
+    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1   ,
+    XXXXXXX, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,
+    XXXXXXX, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+    EXT_PLV, XXXXXXX, XXXXXXX, KC_C,    KC_V,    XXXXXXX, XXXXXXX, KC_N,    KC_M,    XXXXXXX, XXXXXXX, XXXXXXX
+),
+
 /* Adjust (Lower + Raise)
  *                      v------------------------RGB CONTROL--------------------v
  * ,-----------------------------------------------------------------------------------.
@@ -177,6 +196,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 layer_off(_RAISE);
                 layer_off(_LOWER);
                 layer_off(_ADJUST);
+                layer_off(_NAV);
+                layer_off(_NUM);
                 layer_on(_PLOVER);
                 if (!eeconfig_is_enabled()) {
                     eeconfig_init();

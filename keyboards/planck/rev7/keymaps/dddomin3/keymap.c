@@ -16,19 +16,33 @@
 
 #include QMK_KEYBOARD_H
 
-enum planck_layers { _QWERTY, _LOWER, _RAISE, _PLOVER, _ADJUST, _NAV, _NUM };
+enum planck_layers { _MAC, _WINDOWS, _LOWER, _RAISE, _PLOVER, _ADJUST, _MACNAV, _WINNAV, _NUM };
 
-enum planck_keycodes { QWERTY = SAFE_RANGE, PLOVER, BACKLIT, EXT_PLV };
+enum planck_keycodes { MAC = SAFE_RANGE, WINDOWS, EXT_PLV, PLOVER };
 
 #define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
-#define NAV TT(_NAV)
+#define MACNAV TT(_MACNAV)
+#define WINNAV TT(_WINNAV)
 #define NUM TT(_NUM)
+// Mac Keys
+#define MUPWRD A(KC_UP)
+#define MDWNWRD A(KC_DOWN)
+#define MLFTWRD A(KC_LEFT)
+#define MRGTWRD A(KC_RGHT)
+#define MACHOME C(KC_A)
+#define MACEND C(KC_E)
+
+// Windows Keys
+#define WUPWRD C(KC_UP)
+#define WDWNWRD C(KC_DOWN)
+#define WLFTWRD C(KC_LEFT)
+#define WRGTWRD C(KC_RGHT)
 
 /* clang-format off */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-/* Qwerty
+/* MAC
  * ,-----------------------------------------------------------------------------------.
  * | GESC |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  |  -   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -39,18 +53,36 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | Nav  | Ctrl | Alt  | GUI  |Lower | Space| Enter|Raise | Bksp | Alt  | Ctrl | Num  |
  * `-----------------------------------------------------------------------------------'
  */
-[_QWERTY] = LAYOUT_planck_grid(
+[_MAC] = LAYOUT_planck_grid(
     QK_GESC, KC_Q   , KC_W   , KC_E   , KC_R ,   KC_T,   KC_Y,   KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS,
     KC_TAB , KC_A   , KC_S   , KC_D   , KC_F ,   KC_G,   KC_H,   KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
     KC_LSFT, KC_Z   , KC_X   , KC_C   , KC_V ,   KC_B,   KC_N,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-    NAV    , KC_LCTL, KC_LALT, KC_LGUI, LOWER, KC_SPC, KC_ENT,  RAISE,    KC_BSPC, KC_RALT, KC_RCTL, NUM
+    MACNAV , KC_LCTL, KC_LALT, KC_LGUI, LOWER, KC_SPC, KC_ENT,  RAISE,    KC_BSPC, KC_RALT, KC_RCTL, NUM
+),
+
+/* WINDOWS
+ * ,-----------------------------------------------------------------------------------.
+ * | GESC |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  |  -   |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Tab  |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  '   |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Shift |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Nav  | Ctrl | Alt  | GUI  |Lower | Space| Enter|Raise | Bksp | Alt  | Ctrl | Num  |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_WINDOWS] = LAYOUT_planck_grid(
+    QK_GESC, KC_Q   , KC_W   , KC_E   , KC_R ,   KC_T,   KC_Y,   KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS,
+    KC_TAB , KC_A   , KC_S   , KC_D   , KC_F ,   KC_G,   KC_H,   KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+    KC_LSFT, KC_Z   , KC_X   , KC_C   , KC_V ,   KC_B,   KC_N,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+    WINNAV , KC_LGUI, KC_LALT, KC_LCTL, LOWER, KC_SPC, KC_ENT,  RAISE,    KC_BSPC, KC_RALT, KC_RCTL, NUM
 ),
 
 /* Lower
  * ,-----------------------------------------------------------------------------------.
  * |   ~  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  |  =   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Del  |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |      |      |   [  |   ]  |      |
+ * | Del  |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |      |      |   [  |   ]  |   \  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |      | Vol- | Vol+ |   \  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -68,7 +100,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * |   `  |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  |  +   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Del  |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |      |      |   {  |   }  |      |
+ * | Del  |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |      |      |   {  |   }  |  |   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |      | Vol- | Vol+ |  |   |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -87,7 +119,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * |      | Reset|Debug | RGB  |RGBMOD| HUE+ | HUE- | SAT+ | SAT- |BRGTH+|BRGTH-|  Del |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |MUSmod|Aud on|Audoff|AGnorm|AGswap|      |      |      |      |      |
+ * |      |      |MUSmod|Aud on|Audoff| Mac  |Window|      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |Voice-|Voice+|Mus on|Musoff|MIDIon|MIDIof|      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -96,12 +128,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_ADJUST] = LAYOUT_planck_grid(
     _______, QK_BOOT, DB_TOGG, RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, KC_DEL ,
-    _______, EE_CLR,  MU_NEXT, AU_ON,   AU_OFF,  CG_LNRM, CG_LSWP, _______, _______, _______, _______, _______,
-    _______, AU_PREV, AU_NEXT, MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, _______, _______,
+    _______, EE_CLR,  MU_NEXT, AU_ON,   AU_OFF ,  MAC   , WINDOWS, _______, _______, _______, _______, _______,
+    _______, AU_PREV, AU_NEXT, MU_ON,   MU_OFF ,  MI_ON , MI_OFF , _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 
-/* NAV
+/* MACNAV
+ * ,-----------------------------------------------------------------------------------.
+ * |      |      |  Up  |      |      |      |      |      |  Up  |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      | Left | Down | Right|      |      |      | Left | Down | Right|      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      | Home |      | End  |      |      |      | Home |      |  End |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * `-----------------------------------------------------------------------------------'
+ */
+
+[_MACNAV] = LAYOUT_planck_grid(
+    _______, _______, KC_UP  , _______, _______, _______, _______, _______, MUPWRD , _______, _______, _______,
+    _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______, _______, MDWNWRD, MLFTWRD, MRGTWRD, _______, _______,
+    _______, MACHOME, _______, MACEND , _______, _______, _______, MACHOME, _______, MACEND , _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+),
+
+/* WINNAV
  * ,-----------------------------------------------------------------------------------.
  * |      |      |  Up  |      |      |      |      |      |  Up  |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -114,9 +165,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 
-[_NAV] = LAYOUT_planck_grid(
-    _______, _______, KC_UP  , _______, _______, _______, _______, _______, KC_UP  , _______, _______, _______,
-    _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______, _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______,
+[_WINNAV] = LAYOUT_planck_grid(
+    _______, _______, KC_UP  , _______, _______, _______, _______, _______, WUPWRD , _______, _______, _______,
+    _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______, _______, WDWNWRD, WLFTWRD, WRGTWRD, _______, _______,
     _______, KC_HOME, _______, KC_END , _______, _______, _______, KC_HOME, _______, KC_END , _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
@@ -162,10 +213,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #ifdef AUDIO_ENABLE
 float plover_song[][2]    = SONG(PLOVER_SOUND);
 float plover_gb_song[][2] = SONG(PLOVER_GOODBYE_SOUND);
-# define CG_NORM_SONG SONG(CG_NORM_SONG)
-# define CG_SWAP_SONG SONG(CG_SWAP_SONG)
-# define CG_LNRM_SONG SONG(CG_NORM_SONG)
-# define CG_LSWP_SONG SONG(CG_SWAP_SONG)
+float windows_song[][2] = SONG(UNICODE_WINDOWS);
+float mac_song[][2] = SONG(UNICODE_LINUX);
 #endif
 
 layer_state_t layer_state_set_user(layer_state_t state) {
@@ -174,19 +223,24 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case QWERTY:
+        case WINDOWS:
             if (record->event.pressed) {
-                print("mode just switched to qwerty and this is a huge string\n");
-                set_single_persistent_default_layer(_QWERTY);
+                set_single_persistent_default_layer(_WINDOWS);
             }
+#ifdef AUDIO_ENABLE
+            stop_all_notes();
+            PLAY_SONG(windows_song);
+#endif
             return false;
             break;
-        case BACKLIT:
+        case MAC:
             if (record->event.pressed) {
-                register_code(KC_RSFT);
-            } else {
-                unregister_code(KC_RSFT);
+                set_single_persistent_default_layer(_MAC);
             }
+#ifdef AUDIO_ENABLE
+            stop_all_notes();
+            PLAY_SONG(mac_song);
+#endif
             return false;
             break;
         case PLOVER:
@@ -198,7 +252,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 layer_off(_RAISE);
                 layer_off(_LOWER);
                 layer_off(_ADJUST);
-                layer_off(_NAV);
+                layer_off(_MACNAV);
+                layer_off(_WINNAV);
                 layer_off(_NUM);
                 layer_on(_PLOVER);
                 if (!eeconfig_is_enabled()) {

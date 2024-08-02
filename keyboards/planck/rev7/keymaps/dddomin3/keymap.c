@@ -213,8 +213,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #ifdef AUDIO_ENABLE
 float plover_song[][2]    = SONG(PLOVER_SOUND);
 float plover_gb_song[][2] = SONG(PLOVER_GOODBYE_SOUND);
-float windows_song[][2] = SONG(UNICODE_WINDOWS);
-float mac_song[][2] = SONG(UNICODE_LINUX);
+float windows_song[][2] = SONG(MAJOR_SOUND);
+float mac_song[][2] = SONG(MINOR_SOUND);
 #endif
 
 layer_state_t layer_state_set_user(layer_state_t state) {

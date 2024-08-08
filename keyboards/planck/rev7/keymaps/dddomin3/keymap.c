@@ -147,7 +147,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_MACNAV] = LAYOUT_planck_grid(
     _______, _______, KC_UP  , _______, _______, _______, _______, _______, MUPWRD , _______, _______, _______,
-    _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______, _______, MDWNWRD, MLFTWRD, MRGTWRD, _______, _______,
+    _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______, _______, MLFTWRD, MDWNWRD, MRGTWRD, _______, _______,
     _______, MACHOME, _______, MACEND , _______, _______, _______, MACHOME, _______, MACEND , _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
@@ -167,7 +167,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_WINNAV] = LAYOUT_planck_grid(
     _______, _______, KC_UP  , _______, _______, _______, _______, _______, WUPWRD , _______, _______, _______,
-    _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______, _______, WDWNWRD, WLFTWRD, WRGTWRD, _______, _______,
+    _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______, _______, WLFTWRD, WDWNWRD, WRGTWRD, _______, _______,
     _______, KC_HOME, _______, KC_END , _______, _______, _______, KC_HOME, _______, KC_END , _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
@@ -186,7 +186,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_NUM] = LAYOUT_planck_grid(
     _______, KC_ACL0, KC_MS_U, KC_ACL1, KC_ACL2, _______, _______, KC_7   , KC_8, KC_9  , KC_MINS, _______,
     _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______, _______, KC_4   , KC_5, KC_6  , KC_PLUS, _______,
-    _______, KC_WH_U, _______, KC_WH_D, _______, _______, _______, KC_1   , KC_2, KC_3  , KC_BSLS, _______,
+    _______, KC_WH_U, _______, KC_WH_D, _______, _______, _______, KC_1   , KC_2, KC_3  , KC_SLSH, _______,
     _______, _______, _______, _______, _______, KC_BTN1, KC_BTN2, _______, KC_0, KC_DOT, KC_ASTR, _______
 ),
 

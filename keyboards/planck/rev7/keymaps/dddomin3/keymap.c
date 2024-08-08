@@ -119,18 +119,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * |      | Reset|Debug | RGB  |RGBMOD| HUE+ | HUE- | SAT+ | SAT- |BRGTH+|BRGTH-|  Del |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |MUSmod|Aud on|Audoff| Mac  |Window|      |      |      |      |      |
+ * |      |      |MUSmod|Aud on|Audoff| Mac  |Window|Plain |Breath|RAINBW|Swirl|      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |Voice-|Voice+|Mus on|Musoff|MIDIon|MIDIof|      |      |      |      |      |
+ * |      |Voice-|Voice+|Mus on|Musoff|MIDIon|MIDIof|      |      |Speed+|Speed-|      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |             |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [_ADJUST] = LAYOUT_planck_grid(
-    _______, QK_BOOT, DB_TOGG, RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, KC_DEL ,
-    _______, EE_CLR,  MU_NEXT, AU_ON,   AU_OFF ,  MAC   , WINDOWS, _______, _______, _______, _______, _______,
-    _______, AU_PREV, AU_NEXT, MU_ON,   MU_OFF ,  MI_ON , MI_OFF , _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+    _______, QK_BOOT, DB_TOGG, RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD , KC_DEL ,
+    _______, EE_CLR,  MU_NEXT, AU_ON,   AU_OFF ,  MAC   , WINDOWS, RGB_M_P, RGB_M_B, RGB_M_R, RGB_M_SW, _______,
+    _______, AU_PREV, AU_NEXT, MU_ON,   MU_OFF ,  MI_ON , MI_OFF , _______, _______, RGB_SPI, RGB_SPD , _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ , _______
 ),
 
 /* MACNAV

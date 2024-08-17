@@ -24,7 +24,7 @@ enum planck_keycodes { MAC = SAFE_RANGE, WINDOWS, EXT_PLV, PLOVER };
 #define RAISE MO(_RAISE)
 #define MACNAV TT(_MACNAV)
 #define WINNAV TT(_WINNAV)
-#define NUM TT(_NUM)
+#define NUM ACTION_TAP_DANCE_DOUBLE(TT(_NUM), kc2)
 // Mac Keys
 #define MUPWRD A(KC_UP)
 #define MDWNWRD A(KC_DOWN)

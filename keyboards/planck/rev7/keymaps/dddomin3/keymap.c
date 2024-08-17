@@ -22,9 +22,10 @@ enum planck_keycodes { MAC = SAFE_RANGE, WINDOWS, EXT_PLV, PLOVER };
 
 #define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
-#define MACNAV TT(_MACNAV)
-#define WINNAV TT(_WINNAV)
-#define NUM ACTION_TAP_DANCE_DOUBLE(TT(_NUM), kc2)
+#define MACNAV ACTION_TAP_DANCE_DOUBLE(TT(_MACNAV), TT(_NUM))
+#define WINNAV ACTION_TAP_DANCE_DOUBLE(TT(_WINNAV), TT(_NUM)) 
+#define MACNUM ACTION_TAP_DANCE_DOUBLE(TT(_NUM), TT(_MACNAV)) 
+#define WINNUM ACTION_TAP_DANCE_DOUBLE(TT(_NUM), TT(_WINNAV)) 
 // Mac Keys
 #define MUPWRD A(KC_UP)
 #define MDWNWRD A(KC_DOWN)
@@ -57,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     QK_GESC, KC_Q   , KC_W   , KC_E   , KC_R ,   KC_T,   KC_Y,   KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS,
     KC_TAB , KC_A   , KC_S   , KC_D   , KC_F ,   KC_G,   KC_H,   KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
     KC_LSFT, KC_Z   , KC_X   , KC_C   , KC_V ,   KC_B,   KC_N,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-    MACNAV , KC_LCTL, KC_LALT, KC_LGUI, LOWER, KC_SPC, KC_ENT,  RAISE,    KC_BSPC, KC_RALT, KC_RCTL, NUM
+    MACNAV , KC_LCTL, KC_LALT, KC_LGUI, LOWER, KC_SPC, KC_ENT,  RAISE,    KC_BSPC, KC_RALT, KC_RCTL, MACNUM
 ),
 
 /* WINDOWS
@@ -75,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     QK_GESC, KC_Q   , KC_W   , KC_E   , KC_R ,   KC_T,   KC_Y,   KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS,
     KC_TAB , KC_A   , KC_S   , KC_D   , KC_F ,   KC_G,   KC_H,   KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
     KC_LSFT, KC_Z   , KC_X   , KC_C   , KC_V ,   KC_B,   KC_N,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-    WINNAV , KC_LGUI, KC_LALT, KC_LCTL, LOWER, KC_SPC, KC_ENT,  RAISE,    KC_BSPC, KC_RALT, KC_RCTL, NUM
+    WINNAV , KC_LGUI, KC_LALT, KC_LCTL, LOWER, KC_SPC, KC_ENT,  RAISE,    KC_BSPC, KC_RALT, KC_RCTL, WINNUM
 ),
 
 /* Lower
@@ -353,6 +354,26 @@ bool dip_switch_update_user(uint8_t index, bool active) {
 #endif
             break;
         }
+    }
+    return true;
+}
+
+bool process_detected_host_os_user(os_variant_t detected_os) {
+    switch (detected_os) {
+        case OS_MACOS:
+            set_single_persistent_default_layer(_MAC);
+        case OS_IOS:
+            set_single_persistent_default_layer(_MAC);
+            break;
+        case OS_WINDOWS:
+            set_single_persistent_default_layer(_WINDOWS);
+            break;
+        case OS_LINUX:
+            set_single_persistent_default_layer(_WINDOWS);
+            break;
+        case OS_UNSURE:
+            set_single_persistent_default_layer(_WINDOWS);
+            break;
     }
     return true;
 }

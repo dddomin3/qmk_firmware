@@ -20,24 +20,24 @@ enum planck_layers { _MAC, _WINDOWS, _LOWER, _RAISE, _PLOVER, _ADJUST, _MACNAV, 
 
 enum planck_keycodes { MAC = SAFE_RANGE, WINDOWS, EXT_PLV, PLOVER };
 
-#define LOWER MO(_LOWER)
-#define RAISE MO(_RAISE)
-#define MACNAV TT(_MACNAV)
-#define WINNAV TT(_WINNAV)
-#define NUM TT(_NUM)
+#define LOWER LT(_LOWER, KC_SPC)
+#define RAISE LT(_RAISE, KC_ENT)
+#define NUM   TT(_NUM)
 // Mac Keys
-#define MUPWRD A(KC_UP)
+#define MUPWRD  A(KC_UP)
 #define MDWNWRD A(KC_DOWN)
 #define MLFTWRD A(KC_LEFT)
 #define MRGTWRD A(KC_RGHT)
 #define MACHOME C(KC_A)
-#define MACEND C(KC_E)
+#define MACEND  C(KC_E)
+#define MACNAV  TT(_MACNAV)
 
 // Windows Keys
-#define WUPWRD C(KC_UP)
+#define WUPWRD  C(KC_UP)
 #define WDWNWRD C(KC_DOWN)
 #define WLFTWRD C(KC_LEFT)
 #define WRGTWRD C(KC_RGHT)
+#define WINNAV  TT(_WINNAV)
 
 /* clang-format off */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {

@@ -213,7 +213,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #ifdef AUDIO_ENABLE
 float plover_song[][2]    = SONG(PLOVER_SOUND);
 float plover_gb_song[][2] = SONG(PLOVER_GOODBYE_SOUND);
-float windows_song[][2] = SONG(MAJOR_SOUND);
+float windows_song[][2] = SONG(GUITAR_SOUND);
 float mac_song[][2] = SONG(MINOR_SOUND);
 #endif
 

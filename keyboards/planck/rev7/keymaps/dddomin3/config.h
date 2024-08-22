@@ -31,7 +31,7 @@
 /* enable basic MIDI features:
    - MIDI notes can be sent when in Music mode is on
 */
-#define TAPPING_TERM 150
+#define TAPPING_TERM 100
 #define MIDI_BASIC
 
 /* enable advanced MIDI features:
